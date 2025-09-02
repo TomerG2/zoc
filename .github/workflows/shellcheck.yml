@@ -12,10 +12,9 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     
+    - name: Install ShellCheck
+      run: sudo apt-get update && sudo apt-get install -y shellcheck
+    
     - name: Run ShellCheck
-      uses: koalaman/shellcheck-action@v0.9.0
-      with:
-        scandir: '.'
-        format: gcc
-        severity: error
-        exclude: SC1091,SC1071  # Allow sourcing files that may not exist, ignore zsh-specific warnings
+      run: |
+        find . -name "*.sh" -type f -exec shellcheck --format=gcc --severity=error --exclude=SC1091,SC1071 {} \;
