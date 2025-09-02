@@ -76,10 +76,10 @@ _oclog_completion() {
     3)
       # Third argument: namespace - provide namespace completion
       if command -v oc >/dev/null 2>&1 && oc whoami >/dev/null 2>&1; then
-        mapfile -t COMPREPLY < <(compgen -W "$(oc get namespaces -o name 2>/dev/null | sed 's/namespace\///')" -- "$cur")
+        COMPREPLY=($(compgen -W "$(oc get namespaces -o name 2>/dev/null | sed 's/namespace\///')" -- "$cur"))
       else
         # Fallback to common namespaces if not logged in
-        mapfile -t COMPREPLY < <(compgen -W "default kube-system kube-public openshift openshift-config openshift-monitoring" -- "$cur")
+        COMPREPLY=($(compgen -W "default kube-system kube-public openshift openshift-config openshift-monitoring" -- "$cur"))
       fi
       ;;
   esac
