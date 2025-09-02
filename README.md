@@ -30,6 +30,9 @@ exec zsh
 oclogin dev https://your-openshift-api-server:6443 my-namespace
 # Creates a new context with the alias "dev", setting ns to "my-namespace"
 
+ocen
+# Check if the token has expired and refreshes it if needed
+
 ocp get pods
 # Refreshes token if needed and exec "oc get pods"
 ```
