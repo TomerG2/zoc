@@ -5,6 +5,20 @@
 
 Small Zsh plugin with aliases and functions to speed up `oc` logins and token renewal.
 
+### With zoc
+<img src="https://github.com/user-attachments/assets/8997d2c6-8dbd-4bf0-829b-4c8a9a12d2ae" alt="with zoc" width="400"/>
+
+- ⏱️ Time: **10 seconds**
+- 🖱️ Clicks: **2**
+
+---
+
+### Without zoc
+<img src="https://github.com/user-attachments/assets/6aa86434-540b-43a6-b177-825518a3fedc" alt="without zoc" width="400"/>
+
+- ⏱️ Time: **30 seconds**
+- 🖱️ Clicks: **8**
+
 ## Install
 1. Clone zoc to your plugin directory:
 ```sh
