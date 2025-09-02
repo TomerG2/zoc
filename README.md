@@ -6,13 +6,16 @@
 Small Zsh plugin with aliases and functions to speed up `oc` logins and token renewal.
 
 ## Install
-
+1. Clone zoc to your plugin directory:
 ```sh
 git clone https://github.com/TomerG2/zoc ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zoc
-# then in ~/.zshrc:
+```
+2. Then in `~/.zshrc`:
+```sh
 plugins+=(zoc)
 exec zsh
 ```
+
 ## Commands
 
 - **`oclog <alias> <api-server> <namespace>`** → logs you in with a short alias and optional namespace.
