@@ -1,0 +1,57 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Version to release (e.g., 1.0.0)'
+        required: true
+        type: string
+      tag_message:
+        description: 'Tag message'
+        required: false
+        type: string
+        default: 'Release version'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+    
+    - name: Create and push tag
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        
+        # Create and push the tag
+        git tag -a "v${{ github.event.inputs.version }}" -m "${{ github.event.inputs.tag_message }}"
+        git push origin "v${{ github.event.inputs.version }}"
+    
+    - name: Create Release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: v${{ github.event.inputs.version }}
+        release_name: Release v${{ github.event.inputs.version }}
+        body: |
+          ## Changes in v${{ github.event.inputs.version }}
+          
+          - OpenShift login/renew helpers for zsh
+          - Added completion support for `oclog` command
+          - ShellCheck CI integration
+          
+          ## Installation
+          
+          ### Oh My Zsh
+          ```sh
+          git clone https://github.com/TomerG2/zoc ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zoc
+          # then in ~/.zshrc:
+          plugins+=(zoc)
+          exec zsh
+          ```
+        draft: false
+        prerelease: false
