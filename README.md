@@ -1,9 +1,10 @@
-# zoc — OpenShift Zsh helpers
+# zoc — OpenShift Shell helpers
 
-[![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)](https://github.com/TomerG2/zoc/releases)
+[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/TomerG2/zoc/releases)
 [![ShellCheck](https://github.com/TomerG2/zoc/workflows/ShellCheck/badge.svg)](https://github.com/TomerG2/zoc/actions)
 
-Small Zsh plugin with aliases and functions to speed up `oc` logins and token renewal.
+- Shell plugin with aliases and functions to speed up `oc` logins and token renewal. 
+- Works with both **Zsh** and **Bash**.
 
 ### With zoc
 <img src="https://github.com/user-attachments/assets/8997d2c6-8dbd-4bf0-829b-4c8a9a12d2ae" alt="with zoc" width="400"/>
@@ -20,20 +21,52 @@ Small Zsh plugin with aliases and functions to speed up `oc` logins and token re
 - 🖱️ Clicks: **8**
 
 ## Install
+
+### For Zsh (Oh My Zsh)
 1. Clone zoc to your plugin directory:
 ```sh
 git clone https://github.com/TomerG2/zoc ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zoc
 ```
-2. Then in `~/.zshrc`:
+2. Add to your `~/.zshrc`:
 ```sh
 plugins+=(zoc)
+```
+3. Restart your shell:
+```sh
+exec zsh
+```
+
+### For Bash
+1. Clone zoc to a directory of your choice:
+```sh
+git clone https://github.com/TomerG2/zoc ~/.zoc
+```
+2. Add to your `~/.bashrc` or `~/.bash_profile`:
+```sh
+source ~/.zoc/zoc.sh
+```
+3. Restart your shell or run:
+```sh
+source ~/.bashrc  # or ~/.bash_profile
+```
+
+### For Zsh (without Oh My Zsh)
+1. Clone zoc to a directory of your choice:
+```sh
+git clone https://github.com/TomerG2/zoc ~/.zoc
+```
+2. Add to your `~/.zshrc`:
+```sh
+source ~/.zoc/zoc.sh
+```
+3. Restart your shell:
+```sh
 exec zsh
 ```
 
 ## Commands
 
 - **`oclog <alias> <api-server> <namespace>`** → logs you in with a short alias and optional namespace.
-  - Tab completion available for namespace argument (requires active `oc` session)
 - **`ocen`** → checks if your oc login has expired and refreshes the token if it has.
 - **`ocp`** → combines ocensure && oc.
 
