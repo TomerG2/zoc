@@ -1,6 +1,6 @@
 # shellcheck shell=bash
 # zoc.plugin.zsh — OpenShift login/renew helpers for bash and zsh
-# Version: 1.2.2
+# Version: 1.2.3
 
 # Aliases
 alias octx="oc config get-contexts"
