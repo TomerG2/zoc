@@ -27,15 +27,15 @@ fi
 # Show current versions before changing
 echo "📋 Current versions:"
 echo "  zoc.sh: $(grep "Version:" zoc.sh | sed 's/.*Version: //')"
-echo "  README.md: $(grep -o 'version-[0-9]\+\.[0-9]\+\.[0-9]\+' README.md | sed 's/version-//')"
+echo "  README.md: $(grep -o 'version-[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*' README.md | sed 's/version-//')"
 echo ""
 
 # Update version in plugin file
-sed -i.bak "s/Version: [0-9]\+\.[0-9]\+\.[0-9]\+/Version: $VERSION/" zoc.sh
+sed -i .bak "s/Version: [0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*/Version: $VERSION/" zoc.sh
 rm zoc.sh.bak
 
 # Update version in README
-sed -i.bak "s/version-[0-9]\+\.[0-9]\+\.[0-9]\+/version-$VERSION/" README.md
+sed -i .bak "s/version-[0-9][0-9]*\.[0-9][0-9]*\.[0-9][0-9]*/version-$VERSION/" README.md
 rm README.md.bak
 
 echo "✅ Updated version to $VERSION in:"
