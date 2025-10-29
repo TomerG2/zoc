@@ -20,12 +20,39 @@ jobs:
     - uses: actions/checkout@v4
       with:
         fetch-depth: 0
-    
+
+    - name: Verify version consistency
+      run: |
+        VERSION="${{ github.event.inputs.version }}"
+
+        # Validate version format
+        if [[ ! "$VERSION" =~ ^[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
+          echo "❌ Error: Version must be in semver format (e.g., 1.2.0)"
+          exit 1
+        fi
+
+        # Check if version in files matches requested version
+        ZOC_VERSION=$(grep "Version:" zoc.sh | sed 's/.*Version: //' | tr -d ' ')
+        README_VERSION=$(grep -o 'version-[0-9]\+\.[0-9]\+\.[0-9]\+' README.md | sed 's/version-//')
+
+        echo "Requested version: $VERSION"
+        echo "zoc.sh version: $ZOC_VERSION"
+        echo "README.md version: $README_VERSION"
+
+        if [ "$ZOC_VERSION" != "$VERSION" ] || [ "$README_VERSION" != "$VERSION" ]; then
+          echo "❌ Error: Version mismatch!"
+          echo "The version in files doesn't match the requested release version."
+          echo "Please ensure version was bumped using scripts/bump-version.sh and merged to main."
+          exit 1
+        fi
+
+        echo "✅ Version $VERSION is consistent across all files"
+
     - name: Create and push tag
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        
+
         # Create and push the tag
         git tag -a "v${{ github.event.inputs.version }}" -m "${{ github.event.inputs.tag_message }}"
         git push origin "v${{ github.event.inputs.version }}"
