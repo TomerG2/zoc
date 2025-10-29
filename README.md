@@ -1,6 +1,6 @@
 # zoc — OpenShift Shell helpers
 
-[![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/TomerG2/zoc/releases)
+[![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)](https://github.com/TomerG2/zoc/releases)
 [![ShellCheck](https://github.com/TomerG2/zoc/workflows/ShellCheck/badge.svg)](https://github.com/TomerG2/zoc/actions)
 
 - Shell plugin with aliases and functions to speed up `oc` logins and token renewal. 
@@ -86,15 +86,32 @@ ocp get pods
 
 ## Development
 
-### Creating Releases
+### Release Process
 
-Use the provided script to create new releases:
+The release process is split into two phases for better control and transparency:
+
+#### Phase 1: Version Bump (During PR)
+
+Before merging your changes, bump the version numbers in your PR:
 
 ```bash
-./scripts/create-release.sh 1.0.0 "Initial release"
+./scripts/bump-version.sh 1.2.0
 ```
 
-Or use the GitHub Actions workflow:
+This updates version numbers in `zoc.sh` and `README.md`. Commit these changes as part of your PR so reviewers can see what version is being released.
+
+#### Phase 2: Create Release (After Merge to Main)
+
+After your PR is merged to `main`, create the actual release:
+
+**Option A: Manual Script**
+```bash
+./scripts/create-release.sh 1.2.0 "Added new features"
+```
+
+**Option B: GitHub Actions (Recommended)**
 1. Go to Actions > Release > Run workflow
-2. Enter version number and tag message
-3. The workflow will create the tag and GitHub release automatically
+2. Enter the same version number used in Phase 1
+3. The workflow will verify version consistency and create the release automatically
+
+The release process will fail if the version in files doesn't match the requested release version, ensuring consistency.
