@@ -3,7 +3,8 @@
 [![Version](https://img.shields.io/badge/version-1.1.0-blue.svg)](https://github.com/TomerG2/zoc/releases)
 [![ShellCheck](https://github.com/TomerG2/zoc/workflows/ShellCheck/badge.svg)](https://github.com/TomerG2/zoc/actions)
 
-Shell plugin with aliases and functions to speed up `oc` logins and token renewal. Works with both **Zsh** and **Bash**.
+- Shell plugin with aliases and functions to speed up `oc` logins and token renewal. 
+- Works with both **Zsh** and **Bash**.
 
 ### With zoc
 <img src="https://github.com/user-attachments/assets/8997d2c6-8dbd-4bf0-829b-4c8a9a12d2ae" alt="with zoc" width="400"/>
