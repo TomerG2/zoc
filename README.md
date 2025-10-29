@@ -1,6 +1,6 @@
 # zoc — OpenShift Shell helpers
 
-[![Version](https://img.shields.io/badge/version-1.2.2-blue.svg)](https://github.com/TomerG2/zoc/releases)
+[![Version](https://img.shields.io/badge/version-1.2.3-blue.svg)](https://github.com/TomerG2/zoc/releases)
 [![ShellCheck](https://github.com/TomerG2/zoc/workflows/ShellCheck/badge.svg)](https://github.com/TomerG2/zoc/actions)
 
 - Shell plugin with aliases and functions to speed up `oc` logins and token renewal. 

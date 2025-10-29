@@ -1,21 +1,42 @@
 #!/bin/bash
 # Script to create a new release (run AFTER version is bumped and merged to main)
+# Automatically extracts version from zoc.sh file
 
 set -e
 
-if [ $# -eq 0 ]; then
-    echo "Usage: $0 <version> [tag_message]"
-    echo "Example: $0 1.0.0 'Initial release'"
+# Show help if requested
+if [ "$1" = "-h" ] || [ "$1" = "--help" ]; then
+    echo "Usage: $0 [tag_message]"
+    echo ""
+    echo "Creates a new release by automatically extracting version from zoc.sh"
+    echo ""
+    echo "Arguments:"
+    echo "  tag_message    Optional custom tag message (default: 'Release version X.Y.Z')"
+    echo ""
+    echo "Examples:"
+    echo "  $0                           # Use default tag message"
+    echo "  $0 'Fixed critical bug'      # Use custom tag message"
     echo ""
     echo "⚠️  Prerequisites:"
     echo "   1. Version must already be bumped in files (use scripts/bump-version.sh)"
     echo "   2. Changes must be merged to main branch"
     echo "   3. You must be on the main branch"
+    exit 0
+fi
+
+# Extract version from zoc.sh file
+VERSION=$(grep "Version:" zoc.sh | sed 's/.*Version: //' | tr -d ' ')
+
+# Allow optional tag message as first parameter
+TAG_MESSAGE="${1:-Release version $VERSION}"
+
+if [ -z "$VERSION" ]; then
+    echo "❌ Error: Could not extract version from zoc.sh"
+    echo "   Expected format: # Version: X.Y.Z"
     exit 1
 fi
 
-VERSION="$1"
-TAG_MESSAGE="${2:-Release version $VERSION}"
+echo "📦 Detected version: $VERSION"
 
 # Validate we're on main branch
 CURRENT_BRANCH=$(git branch --show-current)
