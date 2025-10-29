@@ -13,11 +13,11 @@ VERSION="$1"
 TAG_MESSAGE="${2:-Release version $VERSION}"
 
 # Update version in plugin file
-sed -i.bak "s/Version: [0-9]\+\.[0-9]\+\.[0-9]\+/Version: $VERSION/" zoc.plugin.zsh
-rm zoc.plugin.zsh.bak
+sed -i.bak "s/Version: [0-9]\.[0-9]\.[0-9]/Version: $VERSION/" zoc.sh
+rm zoc.sh.bak
 
 # Update version in README
-sed -i.bak "s/version-[0-9]\+\.[0-9]\+\.[0-9]\+/version-$VERSION/" README.md
+sed -i.bak "s/version-[0-9]\.[0-9]\.[0-9]/version-$VERSION/" README.md
 rm README.md.bak
 
 echo "✅ Updated version to $VERSION in files"
